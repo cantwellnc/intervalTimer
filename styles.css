@@ -1,0 +1,71 @@
+.title-display{
+	width: 50em;
+	margin-top:1em;
+	font-size: 2em;
+	margin-bottom:0;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.round-display{
+	width: 50em;
+	margin-top:1em;
+	font-size: 2em;
+	margin-bottom:0;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.timer-display{
+	border: 2px solid black;
+	width: 50em;
+	margin-bottom:0;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.timer-input{
+	width: 50em;
+	margin-top: 1em;
+	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	font-family: Roboto; 
+}
+
+
+
+.jumbotron{
+	margin: 0 0;
+}
+
+.col-display{
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#active-info{
+	font-weight: 800;
+}
+
+#rest-info{
+	font-weight: 800;
+}
+
+#button-container{
+	justify-content: space-around;
+	width: 10em;
+	margin: 1em auto;
+}
+
+.start-btn{
+	/*just to make it same width as the reset button*/
+	width:4.5em;
+}
+
+#footer{
+	margin-top: 3em;
+}
+
+
+

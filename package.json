@@ -1,0 +1,17 @@
+{
+  "name": "intervaltimer",
+  "version": "1.0.0",
+  "description": "interval timer for hangboarding, core, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Cantwell",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "howler": "^2.2.0",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0"
+  }
+}
