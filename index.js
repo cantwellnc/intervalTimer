@@ -1,16 +1,3 @@
-// TODO 
-// do error handling for null/nonvalid values captured from inputs in timerHandler()
-// send alert, then hit reset() 
-
-
-// var express = require("express"); 
-// var app = express(); 
-// var {Howl, Howler} = require("howler");
-// app.get("/", (req, res)=> {
-// 	res.sendFile("index.html")
-// })
-
-
 // first, need to get input from time on, time off, and rounds
 var timeOnInput = $(".time-on");
 var timeOn; 
@@ -22,7 +9,7 @@ var numRounds;
 // select GO button
 var start = $(".start-btn");
 
-// bind ONE click listener to GO button so that users can't start multiple timers at once
+// bind one click listener to GO button so that users can't start multiple timers at once
 start.one("click", timerHandler);
 
 // select Reset button
@@ -39,30 +26,34 @@ reset.on("click", ()=> {
 function sleeb(ms){
 	// resolves the promise you return after waiting for prescribed # of milliseconds
 	return new Promise(resolve => setTimeout(resolve, ms)); 
-
 }
 
 function timerHandler(){
-	// grab values from inputs
-
-	timeOn = parseInt(timeOnInput.val());
-	timeOff = parseInt(timeOffInput.val()); 
-	numRounds = parseInt(numRoundsInput.val());
-
-	// try{
-
-	// 	if(!timeOn || !timeOff || !numRounds){
-		 
-	// 	}
-	// }
+	// try to grab values from inputs, if err occurs, show message and reload page
+	try{
+		timeOn = parseInt(timeOnInput.val()); 
+		timeOff = parseInt(timeOffInput.val()); 
+		numRounds = parseInt(numRoundsInput.val());
+		const vals = [timeOn, timeOff, numRounds]; 
+		for(val of vals){
+			if(val<0 || isNaN(val)){
+				throw "err"; 
+			} 
+			else{
+				continue; 
+			}
+		}
+	}
+	catch(err){
+		alert("All inputs must be non-negative integers! Thanks!"); 
+		location.reload(true);
+	}
 	
-
 	// set Active/Rest fields above inputs
 	$("#active-info").text("00:" + (timeOn<10 ? "0"+timeOn : timeOn)); 
 	$("#rest-info").text("00:" + (timeOff<10 ? "0"+timeOff : timeOff));  
 	// start interval timer 
 	timer(timeOn, timeOff,numRounds); 
-	
 }
 
 async function timer(timeOn, timeOff, numRounds){
@@ -75,6 +66,7 @@ async function timer(timeOn, timeOff, numRounds){
 			$("#test-on").text('00:' + ( i<10 ? "0"+i : i));
 			const a = await sleeb(1000); 
 		}
+		$('#coin')[0].play();
 		$("#test-on").text("00:00"); 
 
 		// timeOff 
@@ -82,25 +74,12 @@ async function timer(timeOn, timeOff, numRounds){
 			$("#test-off").text('00:' + ( i<10 ? "0"+i : i));
 			const a = await sleeb(1000); 
 		}
-		$("#test-off").text("00:00"); 
-		// var roundSound = new Howl({src: 'coin.mp3'}); 
-		// roundSound.play();
+		$('#coin')[0].play();
+		$("#test-off").text("00:00");  
 	}
-	// var doneSound = new Howl({src: 'coin.mp3'}); 
-	// doneSound.play(); 
+	// wait for coin to finish, then play horn, display done, refresh page
+	const a = await sleeb(500);
+	$('#horn')[0].play();
+	alert("DONE!");
+	location.reload(true); 
 }
-
-
-
-// Serve
-// app.listen("3000", ()=> {
-// 	console.log("serving on localhost:3000");
-// })
-
-
-
-// consider people not enter integer values of seconds. Send error. 
-
-
-
-
